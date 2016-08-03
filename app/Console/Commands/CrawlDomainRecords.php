@@ -64,7 +64,10 @@ class CrawlDomainRecords extends Command
                       die('抓取结束');
                     }
                     if ($domain_record->time == $yesterday) {
-                      $domain_record->save();
+                        $exist = DomainRecord::where('domain', $domain_record->domain)->first();
+                        if (!$exist) {
+                            $domain_record->save();
+                        }
                     }
                 });
             $page++;
