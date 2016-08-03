@@ -10,7 +10,7 @@ use App\DomainRecord;
 class DomainRecordController extends Controller
 {
     public function index() {
-        $records = DomainRecord::paginate(50);
+        $records = DomainRecord::orderby('time', 'DESC')->paginate(50);
 
         return view('records', compact('records'));
     }
