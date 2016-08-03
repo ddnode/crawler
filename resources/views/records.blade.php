@@ -14,33 +14,45 @@
                 <div class="panel-heading">备案信息</div>
 
                 <div class="panel-body">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>域名</th>
-                        <th>主办单位名称</th>
-                        <th>单位性质</th>
-                        <th>网站备案/许可证号</th>
-                        <th>网站名称</th>
-                        <th>网站首页网址</th>
-                        <th>审核时间</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @foreach($records as $record)
+                  <div>
+                    <form class="navbar-form" role="search">
+                      <div class="form-group">
+                        <input type="text" name="domain" class="form-control" placeholder="域名">
+                      </div>
+                      <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                  </div>
+                  @if (count($records) == 0)
+                    <div>未找到相关记录</div>
+                  @else
+                    <table class="table table-striped">
+                      <thead>
                         <tr>
-                          <td>{{ $record->domain }}</td>
-                          <td>{{ $record->company }}</td>
-                          <td>{{ $record->company_type }}</td>
-                          <td>{{ $record->license }}</td>
-                          <td>{{ $record->website }}</td>
-                          <td>{!! $record->website_front !!}</td>
-                          <td>{{ $record->time }}</td>
+                          <th>域名</th>
+                          <th>主办单位名称</th>
+                          <th>单位性质</th>
+                          <th>网站备案/许可证号</th>
+                          <th>网站名称</th>
+                          <th>网站首页网址</th>
+                          <th>审核时间</th>
                         </tr>
-                      @endforeach
-                    </tbody>
-                  </table>
-                  {!! $records->render() !!}
+                      </thead>
+                      <tbody>
+                        @foreach($records as $record)
+                          <tr>
+                            <td>{{ $record->domain }}</td>
+                            <td>{{ $record->company }}</td>
+                            <td>{{ $record->company_type }}</td>
+                            <td>{{ $record->license }}</td>
+                            <td>{{ $record->website }}</td>
+                            <td>{!! $record->website_front !!}</td>
+                            <td>{{ $record->time }}</td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                    {!! $records->render() !!}
+                  @endif
                 </div>
         </div>
     </div>
