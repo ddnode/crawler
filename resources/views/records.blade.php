@@ -22,7 +22,7 @@
                         <th>单位性质</th>
                         <th>网站备案/许可证号</th>
                         <th>网站名称</th>
-                        <!-- <th>网站首页网址</th> -->
+                        <th>网站首页网址</th>
                         <th>审核时间</th>
                       </tr>
                     </thead>
@@ -34,7 +34,7 @@
                           <td>{{ $record->company_type }}</td>
                           <td>{{ $record->license }}</td>
                           <td>{{ $record->website }}</td>
-                          <!-- <td>{{ $record->website_front }}</td> -->
+                          <td>{!! $record->website_front !!}</td>
                           <td>{{ $record->time }}</td>
                         </tr>
                       @endforeach
