@@ -17,7 +17,15 @@
                   <div>
                     <form class="navbar-form" role="search">
                       <div class="form-group">
-                        <input type="text" name="domain" class="form-control" placeholder="域名">
+                        <select name="type" class="form-control">
+                          <option value="domain">域名</option>
+                          <option value="company">主办单位</option>
+                          <option value="license">备案号</option>
+                          <option value="website">网站名称</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" name="keywords" class="form-control" placeholder="关键词">
                       </div>
                       <button type="submit" class="btn btn-default">搜索</button>
                     </form>
