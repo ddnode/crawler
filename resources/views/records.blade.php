@@ -19,7 +19,7 @@
                       <div class="form-group">
                         <select name="type" class="form-control">
                           @foreach ($options as $key => $value)
-                            @if (old('title') == $key)
+                            @if (old('type') == $key)
                               <option value="{{ $key }}" selected>{{ $value }}</option>
                             @else
                               <option value="{{ $key }}">{{ $value }}</option>
