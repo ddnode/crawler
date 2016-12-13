@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\DomainRecord;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Symfony\Component\DomCrawler\Crawler;
-use Carbon\Carbon;
-use App\DomainRecord;
 
 class CrawlDomainRecords extends Command
 {
@@ -43,12 +43,12 @@ class CrawlDomainRecords extends Command
         $yesterday = Carbon::yesterday()->toDateString();
         $page = 1;
         while (true) {
-            $html = file_get_contents('http://icp.chinaz.com/provinces?page=' . $page);
+            $html = file_get_contents('http://icp.chinaz.com/provinces?page='.$page);
             $crawler = new Crawler($html);
             $crawler
                 ->filter('#result_table > tr')
                 ->each(function (Crawler $node, $i) use ($yesterday) {
-                    $domain_record = new DomainRecord;
+                    $domain_record = new DomainRecord();
                     $domain_record->domain = $node->filter('td')->eq(0)->text();
                     $domain_record->company = $node->filter('td')->eq(1)->text();
                     $domain_record->company_type = $node->filter('td')->eq(2)->text();
@@ -61,7 +61,7 @@ class CrawlDomainRecords extends Command
                     $domain_record->website_front = implode('<br>', $fronts);
                     $domain_record->time = $node->filter('td')->eq(6)->text();
                     if ($domain_record->time < $yesterday) {
-                      die('抓取结束');
+                        die('抓取结束');
                     }
                     if ($domain_record->time == $yesterday) {
                         $exist = DomainRecord::where('domain', $domain_record->domain)->first();
