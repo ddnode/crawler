@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\DomainRecord;
+use Illuminate\Http\Request;
 
 class DomainRecordController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $records = DomainRecord::select();
 
         $options = [
-            'domain' => '域名',
+            'domain'  => '域名',
             'company' => '主办单位',
             'license' => '备案号',
             'website' => '网站名称',
@@ -22,7 +21,7 @@ class DomainRecordController extends Controller
         $input = $request->all();
         if ($request->has('type') && $request->has('keywords')) {
             $field = trim($input['type']);
-            $value = '%' . trim($input['keywords']) . '%';
+            $value = '%'.trim($input['keywords']).'%';
             if (in_array($field, array_keys($options))) {
                 $records = $records->where($field, 'like', $value);
             }
